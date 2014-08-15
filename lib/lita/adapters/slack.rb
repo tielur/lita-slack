@@ -51,6 +51,8 @@ module Lita
 			def http_post(payload)
 				res = Faraday.post do |req|
 					log.debug "Slack::http_post sending payload to #{incoming_url}; length: #{payload.to_json.size}"
+          log.debug "Payload: #{payload.to_json}"
+          log.debug "incoming_token: #{config.incoming_token}"
 					req.url config.incoming_url, :token => config.incoming_token
 					req.headers['Content-Type'] = 'application/json'
 					req.body = payload.to_json
